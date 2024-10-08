@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/search_view_bg"
+            android:background="@drawable/search_bar_background"
             app:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
             android:elevation="10dp"
@@ -120,6 +120,7 @@
 
         <!-- Icon 1: Pharmacie -->
             <LinearLayout
+                android:id="@+id/pharmacie"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,6 +147,7 @@
 
             <!-- Icon 2: Traditionnel -->
             <LinearLayout
+                android:id="@+id/tradi"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,6 +175,7 @@
 
             <!-- Icon 3: Top Docteur -->
             <LinearLayout
+                android:id="@+id/topdoctor"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,6 +204,7 @@
 
             <!-- Icon 4: Appeler Ambulance -->
             <LinearLayout
+                android:id="@+id/ambulance"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

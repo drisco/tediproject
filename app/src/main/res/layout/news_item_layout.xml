@@ -15,8 +15,9 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/news_title"
@@ -44,4 +45,13 @@
             android:textSize="12sp"
             android:layout_marginTop="8dp" />
     </LinearLayout>
+
+    <!-- ImageView pour l'icône de favori -->
+    <ImageView
+        android:id="@+id/favorite_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/bookmark"
+    android:padding="8dp" />
 </LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="@drawable/search_bar_background"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/cart_item_remove"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/fond"
+        android:layout_gravity="end" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="-20dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/cart_item_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/woman" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/cart_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OBH Combi"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/cart_item_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75ml"
+                android:textSize="14sp"
+                android:textColor="#757575" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/cart_item_decrease"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/add" />
+
+        <TextView
+            android:id="@+id/cart_item_quantity_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="18sp"
+            android:layout_marginHorizontal="10dp" />
+
+        <ImageView
+            android:id="@+id/cart_item_increase"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cart_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000 CFA"
+        android:textSize="16sp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="end"/>
+
+</LinearLayout>

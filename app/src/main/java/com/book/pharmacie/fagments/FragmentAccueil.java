@@ -1,6 +1,7 @@
 package com.book.pharmacie.fagments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.MainActivity;
+import com.book.pharmacie.Pharmacie;
 import com.book.pharmacie.R;
 import com.book.pharmacie.adapter.NewsAdapter;
 import com.book.pharmacie.model.NewsItem;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
@@ -27,6 +32,7 @@ public class FragmentAccueil extends Fragment {
     private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList;
+    LinearLayout ambulance,topdoctor,tradi,pharmacie;
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,8 +42,13 @@ public class FragmentAccueil extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_acceuil, container, false);
+        Animation zoomAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_animation);
 
         searchView =getActivity().findViewById(R.id.searchView);
+        tradi =view.findViewById(R.id.tradi);
+        ambulance =view.findViewById(R.id.ambulance);
+        topdoctor =view.findViewById(R.id.topdoctor);
+        pharmacie =view.findViewById(R.id.pharmacie);
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setVerticalScrollBarEnabled(false);
@@ -54,7 +65,7 @@ public class FragmentAccueil extends Fragment {
         newsList.add(new NewsItem("Cancer : Détection précoce", "La détection précoce améliore les chances de traitement.", "https://png.pngtree.com/png-clipart/20210129/ourmid/pngtree-stem-cell-cancer-virus-png-image_2844867.jpg", " 4 min read","",""));
         newsList.add(new NewsItem("Obésité : Risques", "L'obésité augmente le risque de maladies cardiaques.", "https://image.similarpng.com/very-thumbnail/2020/10/Fat-man-playing-sport-isolated-on-transparent-background-PNG.png", " 3 min read","",""));
         newsList.add(new NewsItem("Asthme", "Les déclencheurs incluent les allergènes et la fumée.", "https://png.pngtree.com/png-clipart/20210415/ourmid/pngtree-world-asthma-day-medical-mold-png-image_3221210.jpg", " 2 min read","",""));
-        newsList.add(new NewsItem("Hypertension", "Surveillance régulière de la tension artérielle.", "https://png.pngtree.com/png-vector/20240203/ourlarge/pngtree-hypertension-3d-illustration-png-image_11591845.png ", "6 min read","",""));
+        newsList.add(new NewsItem("Hypertension", "Surveillance régulière de la tension artérielle.", "https://png.pngtree.com/png-vector/20240203/ourlarge/pngtree-hypertension-3d-illustration-png-image_11591845.png", "6 min read","",""));
 
 
         newsAdapter = new NewsAdapter(newsList);
@@ -73,6 +84,15 @@ public class FragmentAccueil extends Fragment {
                     // Scrolling up, show the navigation bar
                     ((MainActivity) getActivity()).showBottomNavigation();
                 }
+            }
+        });
+
+        pharmacie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), Pharmacie.class));
+
             }
         });
         return view;
