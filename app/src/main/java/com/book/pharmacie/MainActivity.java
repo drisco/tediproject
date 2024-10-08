@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ViewPager2 viewPager;
     private FragmentManager fragmentManager;
+    int incr;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -105,5 +106,15 @@ public class MainActivity extends AppCompatActivity {
     // cacher la barre de navigation
     public void showBottomNavigation() {
         bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        incr++;
+        if (incr==2){
+            super.onBackPressed();
+            //finish();
+            finishAffinity();
+        }
     }
 }

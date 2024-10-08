@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:id="@+id/main"
     android:scrollbars="none"
     android:background="@android:color/white">
@@ -136,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:scrollbars="none" />

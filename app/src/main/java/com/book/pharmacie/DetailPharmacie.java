@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.adapter.ProductAdapter;
+import com.book.pharmacie.fagments.FragmentAccueil;
 import com.book.pharmacie.model.Product;
 
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ import java.util.List;
 
 public class DetailPharmacie extends AppCompatActivity {
     RecyclerView recyclerViewProducts,recyclerViewSaleProducts;
-    ImageView card;
+    ImageView card,back_button;
+    int incr;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,6 +36,7 @@ public class DetailPharmacie extends AppCompatActivity {
         setContentView(R.layout.activity_detail_pharmacie);
         Animation zoomAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_animation);
         card = findViewById(R.id.card);
+        back_button = findViewById(R.id.back_button);
          recyclerViewProducts = findViewById(R.id.recycler_view_products);
          recyclerViewSaleProducts = findViewById(R.id.recycler_view_sale_products);
 
@@ -73,10 +76,28 @@ public class DetailPharmacie extends AppCompatActivity {
             startActivity(intent);
         });
 
+        back_button.setOnClickListener(v -> {
+            v.startAnimation(zoomAnimation);
+            Intent intent = new Intent(DetailPharmacie.this, Pharmacie.class);
+            startActivity(intent);
+            finish();
+        });
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        incr++;
+        if (incr==1){
+            super.onBackPressed();
+            startActivity(new Intent(DetailPharmacie.this,Pharmacie.class));
+            finish();
+        }
     }
 }

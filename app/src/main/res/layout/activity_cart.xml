@@ -11,7 +11,7 @@
         android:id="@+id/cart_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Cart"
+        android:text="Mon panier"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:text="1000 CFA" />
+                android:text="0.00 CFA" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16dp"
-                android:text="Taxes" />
+                android:text="Livraison" />
 
             <TextView
                 android:id="@+id/cart_tax"
@@ -97,7 +97,7 @@
                 android:id="@+id/cart_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2000 CFA"
+                android:text="0.00 CFA"
                 android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>

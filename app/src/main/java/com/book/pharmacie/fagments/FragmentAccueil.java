@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.book.pharmacie.MainActivity;
 import com.book.pharmacie.Pharmacie;
 import com.book.pharmacie.R;
+import com.book.pharmacie.Traditionnnel;
 import com.book.pharmacie.adapter.NewsAdapter;
 import com.book.pharmacie.model.NewsItem;
 
@@ -95,7 +96,17 @@ public class FragmentAccueil extends Fragment {
 
             }
         });
+
+        tradi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), Traditionnnel.class));
+
+            }
+        });
         return view;
 
     }
+
 }

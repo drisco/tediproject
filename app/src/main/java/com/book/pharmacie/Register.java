@@ -3,6 +3,8 @@ package com.book.pharmacie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -33,9 +35,11 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         signupButton = findViewById(R.id.signup_button);
         login = findViewById(R.id.google_signup_button);
+        Animation zoomAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_animation);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(zoomAnimation);
                 startActivity(new Intent(Register.this,Login.class));
                 //finish();
             }
@@ -44,6 +48,7 @@ public class Register extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(zoomAnimation);
                 // Récupérer les données lorsque le bouton est cliqué
                 registerUser();
             }

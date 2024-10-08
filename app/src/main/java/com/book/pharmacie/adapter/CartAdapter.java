@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.book.pharmacie.CartActivity;
 import com.book.pharmacie.R;
 import com.book.pharmacie.model.Product;
+import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
          product = cartItems.get(position);
         holder.bind(product, quantities.get(product));
         prixInitial();
+
+        Glide.with(holder.itemView.getContext())
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.ic_launcher_background) // Image par défaut
+                .into(holder.cart_item_image);
         holder.incrementButton.setOnClickListener(v -> {
             int currentQuantity = quantities.get(product);
             currentQuantity++;
@@ -68,6 +74,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             quantities.remove(product);
             notifyItemRemoved(position);
             updateTotalPrice(); // Mettre à jour le prix total
+            prixInitial();
         });
     }
 
@@ -96,7 +103,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, quantityNumber, price;
-        ImageView incrementButton, decrementButton, removeButton;
+        ImageView incrementButton, decrementButton, removeButton,cart_item_image;
 
         public CartViewHolder(View itemView) {
             super(itemView);
@@ -106,6 +113,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             incrementButton = itemView.findViewById(R.id.cart_item_increase);
             decrementButton = itemView.findViewById(R.id.cart_item_decrease);
             removeButton = itemView.findViewById(R.id.cart_item_remove);
+            cart_item_image = itemView.findViewById(R.id.cart_item_image);
         }
 
         public void bind(Product product, int quantity) {

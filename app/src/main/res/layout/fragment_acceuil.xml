@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#654CAF50"
-    tools:context=".MainActivity">
+    android:background="#654CAF50">
 
     <!-- Header section with avatar and welcome message -->
     <LinearLayout
@@ -34,7 +33,7 @@
                 android:id="@+id/avatar_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/user"
+                android:src="@drawable/woman"
                 android:scaleType="centerCrop"
                 android:layout_marginRight="16dp" />
 
@@ -126,11 +125,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"> <!-- Marges ajoutées entre les icônes -->
+                android:layout_marginEnd="10dp"> <!-- Marges ajoutées entre les icônes -->
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/pharmacy"
                     android:background="@drawable/google_button_background"
                     android:backgroundTint="@color/green"/>
@@ -158,8 +157,8 @@
                 <ImageView
                     android:background="@drawable/google_button_background"
                     android:backgroundTint="@color/green"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/az"
                     app:tint="@color/white" />
 
@@ -184,8 +183,8 @@
                 android:layout_margin="8dp"> <!-- Marges ajoutées -->
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/doctor"
                     android:background="@drawable/google_button_background"
                     android:backgroundTint="@color/green"/>
@@ -213,8 +212,8 @@
                 android:layout_margin="8dp"> <!-- Marges ajoutées -->
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/ambulance"
                     android:background="@drawable/google_button_background"
                     android:backgroundTint="@color/green"/>

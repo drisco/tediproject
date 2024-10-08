@@ -51,10 +51,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.productImage);
 
-        holder.itemView.setOnClickListener(v -> {
+        /*holder.itemView.setOnClickListener(v -> {
             v.startAnimation(zoomAnimation);
 
-        });
+        });*/
 
         holder.btn.setOnClickListener(v -> {
             v.startAnimation(zoomAnimation);

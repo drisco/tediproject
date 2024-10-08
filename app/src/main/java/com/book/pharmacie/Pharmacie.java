@@ -1,5 +1,6 @@
 package com.book.pharmacie;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -11,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.adapter.PharmacyAdapter;
+import com.book.pharmacie.fagments.FragmentAccueil;
 import com.book.pharmacie.model.Pharmacy;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Pharmacie extends AppCompatActivity {
+    int incr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +64,15 @@ public class Pharmacie extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        incr++;
+        if (incr==1){
+            super.onBackPressed();
+            startActivity(new Intent(Pharmacie.this, MainActivity.class));
+            finish();
+        }
     }
 }
