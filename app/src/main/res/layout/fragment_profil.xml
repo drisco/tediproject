@@ -66,9 +66,11 @@
 
             <!-- Ajouter une vue pour le trait noir en bas -->
             <LinearLayout
-                android:layout_weight="0"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.01"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <View
                     android:layout_width="match_parent"
@@ -104,7 +106,19 @@
                     android:textSize="18sp"/>
 
             </LinearLayout>
+            <!-- Ajouter une vue pour le trait noir en bas -->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#9FBAE9" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
