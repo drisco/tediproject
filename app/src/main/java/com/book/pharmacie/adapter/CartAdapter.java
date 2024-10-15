@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +23,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private Map<Product, Integer> quantities; // Map pour garder une trace des quantités
     private double totalPrice = 0.0; // Pour garder une trace du prix total
     private CartActivity cartActivity; // Référence à l'activité du panier
+    private View cardBankLayout;
     private Product product;
+    private boolean isCardBankVisible = true;
 
-    public CartAdapter(CartActivity activity, List<Product> cartItems) {
+    public CartAdapter(CartActivity activity, List<Product> cartItems, View cardBankLayout) {
         this.cartItems = cartItems;
-        this.cartActivity = activity; // Conserver la référence à l'activité
+        this.cartActivity = activity;
         this.quantities = new HashMap<>();
+        this.cardBankLayout = cardBankLayout;
 
         // Initialisez la quantité pour chaque produit dans le panier
         for (Product product : cartItems) {
@@ -43,29 +47,40 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
-         product = cartItems.get(position);
+        product = cartItems.get(position);
         holder.bind(product, quantities.get(product));
         prixInitial();
+
+        holder.cv.setOnClickListener(v -> {
+            // Basculer la visibilité de `cardBankLayout`
+            if (isCardBankVisible) {
+                cardBankLayout.setVisibility(View.GONE);
+            } else {
+                cardBankLayout.setVisibility(View.VISIBLE);
+            }
+            isCardBankVisible = !isCardBankVisible;
+        });
 
         Glide.with(holder.itemView.getContext())
                 .load(product.getImageUrl())
                 .placeholder(R.drawable.ic_launcher_background) // Image par défaut
                 .into(holder.cart_item_image);
+
         holder.incrementButton.setOnClickListener(v -> {
             int currentQuantity = quantities.get(product);
             currentQuantity++;
             quantities.put(product, currentQuantity);
             holder.updateQuantity(product, currentQuantity);
-            updateTotalPrice(); // Mettre à jour le prix total
+            updateTotalPrice();
         });
 
         holder.decrementButton.setOnClickListener(v -> {
             int currentQuantity = quantities.get(product);
-            if (currentQuantity > 1) { // Ne pas descendre en dessous de 1
+            if (currentQuantity > 1) {
                 currentQuantity--;
                 quantities.put(product, currentQuantity);
                 holder.updateQuantity(product, currentQuantity);
-                updateTotalPrice(); // Mettre à jour le prix total
+                updateTotalPrice();
             }
         });
 
@@ -73,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cartItems.remove(position);
             quantities.remove(product);
             notifyItemRemoved(position);
-            updateTotalPrice(); // Mettre à jour le prix total
+            updateTotalPrice();
             prixInitial();
         });
     }
@@ -84,7 +99,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             totalPrice += product.getPrice();
         }
 
-        cartActivity.prixInitial(totalPrice); // Mettre à jour le prix total dans l'activité
+        cartActivity.prixInitial(totalPrice);
     }
 
     private void updateTotalPrice() {
@@ -101,9 +116,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return cartItems.size();
     }
 
+    public Map<Product, Integer> getCartItemsWithQuantities() {
+        return quantities;
+    }
+
     public class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, quantityNumber, price;
         ImageView incrementButton, decrementButton, removeButton,cart_item_image;
+        LinearLayout cv;
 
         public CartViewHolder(View itemView) {
             super(itemView);
@@ -114,12 +134,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             decrementButton = itemView.findViewById(R.id.cart_item_decrease);
             removeButton = itemView.findViewById(R.id.cart_item_remove);
             cart_item_image = itemView.findViewById(R.id.cart_item_image);
+            cv = itemView.findViewById(R.id.cv);
         }
 
         public void bind(Product product, int quantity) {
             productName.setText(product.getName());
-            updateQuantity(product,quantity);
-            price.setText(String.format("%d CFA", (int) (product.getPrice() * quantity)));
+            price.setText(String.format("%d CFA", (int) product.getPrice()));
+            quantityNumber.setText(String.valueOf(quantity));
         }
 
         public void updateQuantity(Product product, int quantity) {
@@ -128,3 +149,4 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 }
+

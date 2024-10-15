@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.book.pharmacie.MainActivity;
 import com.book.pharmacie.Pharmacie;
 import com.book.pharmacie.R;
+import com.book.pharmacie.SharedPreferencesHelper;
 import com.book.pharmacie.Traditionnnel;
 import com.book.pharmacie.adapter.NewsAdapter;
 import com.book.pharmacie.model.NewsItem;
+import com.book.pharmacie.model.User;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,8 @@ public class FragmentAccueil extends Fragment {
     private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList;
+    TextView user_name;
+    SharedPreferencesHelper preferencesHelper;
     LinearLayout ambulance,topdoctor,tradi,pharmacie;
 
 
@@ -44,12 +49,13 @@ public class FragmentAccueil extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_acceuil, container, false);
         Animation zoomAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_animation);
-
+        preferencesHelper = new SharedPreferencesHelper(getContext());
         searchView =getActivity().findViewById(R.id.searchView);
         tradi =view.findViewById(R.id.tradi);
         ambulance =view.findViewById(R.id.ambulance);
         topdoctor =view.findViewById(R.id.topdoctor);
         pharmacie =view.findViewById(R.id.pharmacie);
+        user_name =view.findViewById(R.id.user_name);
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setVerticalScrollBarEnabled(false);
@@ -71,8 +77,9 @@ public class FragmentAccueil extends Fragment {
 
         newsAdapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(newsAdapter);
+        User user = preferencesHelper.getUser();
 
-
+        user_name.setText(user.getName());
         // Ajoutez le ScrollListener pour cacher la barre de navigation
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

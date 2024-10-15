@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Pharmacie" parent="Base.Theme.Pharmacie" />
+
+    <style name="CustomDialogTransparent" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#2A8D8E8F</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item> <!-- Fond semi-transparent -->
+    </style>
 </resources>

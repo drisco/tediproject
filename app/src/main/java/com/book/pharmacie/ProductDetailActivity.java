@@ -3,6 +3,8 @@ package com.book.pharmacie;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -14,7 +16,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.book.pharmacie.model.Product;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -23,10 +28,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     private ImageView btnDecrease, btnIncrease;
     private Button btnBuy;
+    private Product product;
+    private ArrayList<Product> cartList;
+
+
 
     private int quantity = 1;
     private double productPriceValue = 9.99;
-
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +53,26 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnIncrease = findViewById(R.id.btn_increase);
         btnBuy = findViewById(R.id.btnBuy);
         tvQuantity = findViewById(R.id.tv_quantity);
+        btnBuy = findViewById(R.id.btnBuy);
 
-        Intent intent = getIntent();
-        String productNameValue = intent.getStringExtra("product_name");
-        productPriceValue = intent.getDoubleExtra("product_price", 0.0);
-        String productImageUrl = intent.getStringExtra("product_image_url");
+        product = getIntent().getParcelableExtra("product");
+
+        productPriceValue = product.getPrice();
 
         // Configuration des valeurs reçues
-        productName.setText(productNameValue);
-        productPrice.setText(String.format("%.2f CFA", productPriceValue));
+        productName.setText(product.getName());
+        productPrice.setText(String.format("%.2f CFA", product.getPrice()));
 
         // Charger l'image avec Glide
         Glide.with(this)
-                .load(productImageUrl)
+                .load(product.getImageUrl())
                 .into(productImageView);
+
+
+        cartList = getIntent().getParcelableArrayListExtra("cart_list");
+        if (cartList == null) {
+            cartList = new ArrayList<>();
+        }
 
         btnIncrease.setOnClickListener(v -> {
             quantity++;
@@ -74,6 +88,20 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Gérer le retour en arrière
         backButton.setOnClickListener(v -> onBackPressed());
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.startAnimation(AnimationUtils.loadAnimation(ProductDetailActivity.this, R.anim.zoom_animation));
+
+                // Ajouter le produit au panier
+                cartList.add(product);
+                Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
+                intent.putParcelableArrayListExtra("cart_list", cartList);
+                startActivity(intent);
+
+            }
+        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:orientation="vertical"
-    android:layout_margin="10dp"
-    android:padding="16dp">
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/cart_title"
@@ -14,17 +14,25 @@
         android:text="Mon panier"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
+        android:layout_centerHorizontal="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recycler_view"
+        android:layout_below="@+id/cart_title"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="200dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/cardbank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:background="@drawable/google_button_background"
+        android:backgroundTint="@color/grey"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -39,23 +47,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/subtotal_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
-                android:text="Subtotal" />
+                android:text="Subtotal"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/cart_subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="0.00 CFA" />
+                android:text="0.00 CFA"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,15 +76,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
-                android:text="Livraison" />
+                android:text="Livraison"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/cart_tax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="1000 CFA" />
+                android:text="1000 CFA"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,18 +109,194 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/titre"
+            android:layout_marginStart="90sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="90sp"
+            android:background="@android:color/black" />
+
+        <TextView
+            android:id="@+id/aaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Payment Method"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/search_bar_background"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="75dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:elevation="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/orange"
+                app:civ_border_color="#B5EC9D"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:text="Selectionner"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search_bar_background"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="75dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:elevation="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mtn"
+                app:civ_border_color="#B5EC9D"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:text="Selectionner"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/moov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search_bar_background"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar1"
+                android:layout_width="75dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:elevation="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/moov"
+                app:civ_border_color="#B5EC9D"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:text="Selectionner"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search_bar_background"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar2"
+                android:layout_width="75dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:elevation="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/wave"
+                app:civ_border_color="#B5EC9D"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:text="Selectionner"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/validate_button"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Validez"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/google_button_background"
-        android:backgroundTint="@color/green"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/search_bar_background"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2000 FCFA"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/validate_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/google_button_background"
+            android:backgroundTint="@color/green"
+            android:gravity="center"
+            android:text="Validez"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

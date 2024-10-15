@@ -59,9 +59,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.btn.setOnClickListener(v -> {
             v.startAnimation(zoomAnimation);
             Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra("product_name", product.getName());
-            intent.putExtra("product_price", product.getPrice());
-            intent.putExtra("product_image_url", product.getImageUrl());
+            intent.putExtra("product", product);
+            intent.putExtra("quantity", "rien");
             context.startActivity(intent);
         });
 

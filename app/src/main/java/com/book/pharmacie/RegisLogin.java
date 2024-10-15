@@ -13,10 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.book.pharmacie.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegisLogin extends AppCompatActivity {
 
     LinearLayout button_login,button_register,google_button;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,7 @@ public class RegisLogin extends AppCompatActivity {
         setContentView(R.layout.activity_regis_login);
         Animation zoomAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_animation);
         button_login =findViewById(R.id.button_login);
+
         button_register =findViewById(R.id.button_register);
         google_button =findViewById(R.id.google_button);
 
@@ -31,6 +35,7 @@ public class RegisLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(zoomAnimation);
+
                 startActivity(new Intent(RegisLogin.this,Register.class));
                 //finish();
             }
