@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -28,10 +30,11 @@ public class Login extends AppCompatActivity {
         phone_input= findViewById(R.id.phone_input);
         password_input= findViewById(R.id.password_input);
         inscription= findViewById(R.id.google_signup_button);
-
+        Animation zoomAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_animation);
         connexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(zoomAnimation);
                 // Récupérer les données lorsque le bouton est cliqué
                 startActivity(new Intent(Login.this,MainActivity.class));
                 finish();
@@ -40,6 +43,7 @@ public class Login extends AppCompatActivity {
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(zoomAnimation);
                 // Récupérer les données lorsque le bouton est cliqué
                 startActivity(new Intent(Login.this,Register.class));
             }

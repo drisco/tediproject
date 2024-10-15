@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:id="@+id/main"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:id="@+id/card"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/bookmark"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/tv_pharmacie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharmacie santé"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="26dp"
+            android:hint="Search Produits, catégories..."
+            android:textColor="@color/black"
+            android:background="@drawable/search_bar_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:drawablePadding="8dp" />
+
+        <!-- Ordonnance Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:background="@drawable/google_button_background"
+            android:backgroundTint="#254CAF50"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/comprime"/>
+
+            <TextView
+                android:id="@+id/df"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commandez vite avec Ordonnance"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/df"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/google_button_background"
+                    android:backgroundTint="@color/green"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Télécharger\n Ordonnance"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <!-- Nos Produits Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nos produits"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_view_all_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir tout"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:textColor="@android:color/holo_blue_light"/>
+        </LinearLayout>
+
+        <!-- RecyclerView for Products -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:scrollbars="none" />
+
+        <!-- Product on Sale Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Produit en vente"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_view_all_sale_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir tout"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textColor="@android:color/holo_blue_light"/>
+        </LinearLayout>
+
+        <!-- RecyclerView for Sale Products -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_sale_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"/>
+
+    </LinearLayout>
+
+</ScrollView>

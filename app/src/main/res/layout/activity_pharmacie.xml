@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:scrollbars="none"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
+
+        <!-- Top Navigation Bar -->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharmacies"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="26dp"
+            android:hint="Search Produits, catégories..."
+            android:textColor="@color/black"
+            android:background="@drawable/search_bar_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:drawablePadding="8dp" />
+
+        <!-- Commandez Card -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:background="@drawable/google_button_background"
+            android:backgroundTint="#254CAF50"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/comprime"/>
+
+            <TextView
+                android:id="@+id/df"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commandez vite avec Ordonnance"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/df"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/google_button_background"
+                    android:backgroundTint="@color/green"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Télécharger\n Ordonnance"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Pharmacie disponible Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharmacie disponible"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir tout"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Horizontal List of Available Pharmacies -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pharmacie_disponible_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="1dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scrollbars="none" />
+
+        <!-- Pharmacie de garde Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharmacie de garde"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir tout"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Horizontal List of Pharmacies on Call -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pharmacie_garde_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scrollbars="none" />
+    </LinearLayout>
+</ScrollView>

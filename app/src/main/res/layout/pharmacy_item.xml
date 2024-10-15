@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/search_bar_background"
+    android:padding="15dp"
+    android:elevation="10dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp">
+
+    <ImageView
+        android:id="@+id/pharmacy_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/user"
+        android:elevation="20dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/pharmacy_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pharmacy Name"
+        android:elevation="20dp"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:gravity="center" />
+</LinearLayout>

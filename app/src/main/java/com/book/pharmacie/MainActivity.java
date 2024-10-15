@@ -2,6 +2,7 @@ package com.book.pharmacie;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ViewPager2 viewPager;
     private FragmentManager fragmentManager;
+    int incr;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -93,5 +95,26 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+
+    // cacher la barre de navigation lorsque je scrol vers le bas
+    public void hideBottomNavigation() {
+        bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    // cacher la barre de navigation
+    public void showBottomNavigation() {
+        bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        incr++;
+        if (incr==2){
+            super.onBackPressed();
+            //finish();
+            finishAffinity();
+        }
     }
 }

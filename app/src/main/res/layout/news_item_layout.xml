@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="@drawable/google_button_background">
+
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="16dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/news_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="News Title"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/news_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Short description here"
+            android:textColor="@color/green"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/news_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5min read"
+            android:textColor="@color/green"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- ImageView pour l'icône de favori -->
+    <ImageView
+        android:id="@+id/favorite_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/bookmark"
+    android:padding="8dp" />
+</LinearLayout>

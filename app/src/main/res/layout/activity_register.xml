@@ -66,7 +66,9 @@
                     android:layout_toEndOf="@id/name_icon"
                     android:layout_marginStart="10dp"
                     android:hint="Nom et Prénom"
+                    android:inputType="text"
                     android:padding="10dp"
+
                     android:textColorHint="@android:color/white"
                     android:backgroundTint="@android:color/white"
                     android:textColor="@android:color/white" />
@@ -97,6 +99,7 @@
                     android:layout_marginStart="10dp"
                     android:hint="Email"
                     android:padding="10dp"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="@android:color/white"
                     android:backgroundTint="@android:color/white"
                     android:textColor="@android:color/white" />
@@ -127,6 +130,7 @@
                     android:layout_marginStart="10dp"
                     android:hint="Numéros"
                     android:padding="10dp"
+                    android:inputType="phone"
                     android:textColorHint="@android:color/white"
                     android:backgroundTint="@android:color/white"
                     android:textColor="@android:color/white" />
@@ -156,6 +160,7 @@
                     android:layout_marginStart="10dp"
                     android:hint="Coordonnées"
                     android:padding="10dp"
+                    android:inputType="text"
                     android:textColorHint="@android:color/white"
                     android:backgroundTint="@android:color/white"
                     android:textColor="@android:color/white" />

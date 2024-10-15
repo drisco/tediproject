@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "917495232734",
+    "firebase_url": "https://pharma-c129b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pharma-c129b",
+    "storage_bucket": "pharma-c129b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917495232734:android:cac73443efdbdf65682a4f",
+        "android_client_info": {
+          "package_name": "com.book.pharmacie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwD0No2rl9-DyzgmkScOrm1FFsL5lw4X8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

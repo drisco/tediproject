@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_margin="10dp"
+    android:id="@+id/main"
+    tools:context=".ProductDetailActivity">
+
+    <!-- Bouton de retour -->
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back"
+        android:contentDescription="Back"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Titre de la page -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pharmacy"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
+        android:layout_toEndOf="@id/back_button"
+        android:layout_alignBaseline="@id/back_button"
+        android:layout_marginStart="16dp" />
+
+    <!-- Image du produit -->
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/woman"
+        android:contentDescription="Product Image" />
+
+    <!-- Nom du produit -->
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OBH Combi"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@id/product_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
+    <!-- Volume ou quantité -->
+    <TextView
+        android:id="@+id/product_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="75ml"
+        android:textSize="14sp"
+        android:textColor="#8A8A8A"
+        android:layout_below="@id/product_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!-- Étoiles de notation -->
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rating="4.0"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:layout_below="@id/product_quantity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!-- Prix -->
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9.99 CFA"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_below="@id/rating_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Sélection quantité et bouton ajout -->
+    <LinearLayout
+        android:id="@+id/quantity_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/rating_bar"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/btn_decrease"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/add"
+            android:backgroundTint="@color/green" />
+
+        <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            android:id="@+id/btn_increase"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/add"
+            android:backgroundTint="@color/green" />
+
+    </LinearLayout>
+
+    <!-- Description du produit -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OBH COMBI est un médicament contre la toux contenant du paracétamol, de l'éphédrine HCl et du maléate de chlorphénamine..."
+        android:textSize="14sp"
+        android:layout_below="@id/product_price"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bouton d'achat -->
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Acheter"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/green"
+        android:textColor="@android:color/white"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>
