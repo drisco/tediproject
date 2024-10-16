@@ -24,7 +24,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private double totalPrice = 0.0; // Pour garder une trace du prix total
     private CartActivity cartActivity; // Référence à l'activité du panier
     private View cardBankLayout;
-    private Product product;
+    Product product;
     private boolean isCardBankVisible = true;
 
     public CartAdapter(CartActivity activity, List<Product> cartItems, View cardBankLayout) {
@@ -47,8 +47,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
+        // Utiliser une variable locale `product` ici
         product = cartItems.get(position);
-        holder.bind(product, quantities.get(product));
+        int quantity = quantities.get(product);
+
+        holder.bind(product, quantity);
         prixInitial();
 
         holder.cv.setOnClickListener(v -> {
@@ -66,30 +69,44 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .placeholder(R.drawable.ic_launcher_background) // Image par défaut
                 .into(holder.cart_item_image);
 
+        // Associer les boutons d'incrémentation et de décrémentation uniquement à cet item spécifique
         holder.incrementButton.setOnClickListener(v -> {
-            int currentQuantity = quantities.get(product);
-            currentQuantity++;
-            quantities.put(product, currentQuantity);
-            holder.updateQuantity(product, currentQuantity);
-            updateTotalPrice();
-        });
-
-        holder.decrementButton.setOnClickListener(v -> {
-            int currentQuantity = quantities.get(product);
-            if (currentQuantity > 1) {
-                currentQuantity--;
-                quantities.put(product, currentQuantity);
-                holder.updateQuantity(product, currentQuantity);
+            // Toujours obtenir la position actuelle du ViewHolder
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                Product currentProduct = cartItems.get(adapterPosition);
+                int currentQuantity = quantities.get(currentProduct);
+                currentQuantity++;
+                quantities.put(currentProduct, currentQuantity);
+                holder.updateQuantity(currentProduct, currentQuantity);
                 updateTotalPrice();
             }
         });
 
+        holder.decrementButton.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                Product currentProduct = cartItems.get(adapterPosition);
+                int currentQuantity = quantities.get(currentProduct);
+                if (currentQuantity > 1) {
+                    currentQuantity--;
+                    quantities.put(currentProduct, currentQuantity);
+                    holder.updateQuantity(currentProduct, currentQuantity);
+                    updateTotalPrice();
+                }
+            }
+        });
+
         holder.removeButton.setOnClickListener(v -> {
-            cartItems.remove(position);
-            quantities.remove(product);
-            notifyItemRemoved(position);
-            updateTotalPrice();
-            prixInitial();
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                Product currentProduct = cartItems.get(adapterPosition);
+                cartItems.remove(adapterPosition);
+                quantities.remove(currentProduct);
+                notifyItemRemoved(adapterPosition);
+                updateTotalPrice();
+                prixInitial();
+            }
         });
     }
 
@@ -108,7 +125,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             totalPrice += product.getPrice() * quantities.get(product);
         }
 
-        cartActivity.updateTotalPrice(totalPrice,product.getPrice()); // Mettre à jour le prix total dans l'activité
+        cartActivity.updateTotalPrice(totalPrice, product.getPrice()); // Mettre à jour le prix total dans l'activité
     }
 
     @Override
@@ -122,7 +139,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, quantityNumber, price;
-        ImageView incrementButton, decrementButton, removeButton,cart_item_image;
+        ImageView incrementButton, decrementButton, removeButton, cart_item_image;
         LinearLayout cv;
 
         public CartViewHolder(View itemView) {
@@ -149,4 +166,5 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 }
+
 
