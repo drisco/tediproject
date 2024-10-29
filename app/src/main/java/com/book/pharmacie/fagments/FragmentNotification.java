@@ -53,18 +53,15 @@ public class FragmentNotification extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commandeList.clear(); // Effacer la liste précédente
-                System.out.println("FDBHGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGH21 "+dataSnapshot);
                 if (dataSnapshot.exists()){
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        System.out.println("FDBHGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGH "+dataSnapshot);
                         Commande commande = snapshot.getValue(Commande.class);
                         commandeList.add(commande);
                     }
 
                     commandeAdapter.notifyDataSetChanged(); // Notifier l'adapter des changements
                 }else{
-                    System.out.println("FDBHGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGH "+"NADANADANADANADA");
                 }
 
             }

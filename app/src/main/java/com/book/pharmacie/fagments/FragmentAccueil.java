@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.book.pharmacie.Ambulance;
 import com.book.pharmacie.MainActivity;
 import com.book.pharmacie.Pharmacie;
 import com.book.pharmacie.R;
 import com.book.pharmacie.SharedPreferencesHelper;
+import com.book.pharmacie.TopDocteur;
 import com.book.pharmacie.Traditionnnel;
 import com.book.pharmacie.adapter.NewsAdapter;
 import com.book.pharmacie.model.NewsItem;
@@ -78,8 +80,12 @@ public class FragmentAccueil extends Fragment {
         newsAdapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(newsAdapter);
         User user = preferencesHelper.getUser();
+        if (user !=null){
+            if (!user.getName().isEmpty()){
+                user_name.setText(user.getName());
+            }
+        }
 
-        user_name.setText(user.getName());
         // Ajoutez le ScrollListener pour cacher la barre de navigation
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -109,6 +115,24 @@ public class FragmentAccueil extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(zoomAnimation);
                 startActivity(new Intent(getActivity(), Traditionnnel.class));
+
+            }
+        });
+
+        topdoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), TopDocteur.class));
+
+            }
+        });
+
+        ambulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), Ambulance.class));
 
             }
         });

@@ -29,7 +29,7 @@
                 android:id="@+id/card"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/bookmark"
+                android:src="@drawable/panier"
                 android:layout_alignParentEnd="true" />
 
             <TextView

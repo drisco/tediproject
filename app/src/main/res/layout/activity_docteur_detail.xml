@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:scrollbars="none"
+    android:layout_margin="5dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <ImageView
+                android:id="@+id/btn"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:src="@drawable/back"/>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Docteur infos"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/black"/>
+
+        </RelativeLayout>
+
+        <!-- Doctor Profile Section -->
+        <LinearLayout
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/doctor_image"
+                android:layout_width="119dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/woman" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/doctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. TEDJI"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/doctor_specialty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cardiologist"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/doctor_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.7"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/doctor_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" • 800m away"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- About Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="A propos"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/about_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam..."
+            android:textColor="@android:color/darker_gray"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/read_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voir plus"
+            android:textSize="14dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_marginTop="2dp" />
+
+        <!-- Date Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <!-- RecyclerView pour afficher les jours du mois -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewDates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                android:scrollIndicators="none"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+
+
+        <!-- Time Slot Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/time_slot_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <!-- Additional time slots if necessary -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/time_slot_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/time_slot_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/time_slot_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20:00 PM"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="@drawable/border_background"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/online_consultation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consultation en ligne"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="15dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/google_button_background"
+                android:backgroundTint="@color/green"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/in_person_consultation"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consultation en presentielle"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:padding="15dp"
+                android:background="@drawable/google_button_background"
+                android:backgroundTint="@color/green"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
