@@ -27,6 +27,7 @@ public class Ambulance extends AppCompatActivity {
     //private CardView cvMedical, cvAccident, cvFire, cvOther;
     private LinearLayout b4,b3,b2,b1;
     private Livreur livreur;
+    LinearLayout selectedSlot = null;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -95,6 +96,29 @@ public class Ambulance extends AppCompatActivity {
             }
         });
 
+        View.OnClickListener slotClickListener = new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                LinearLayout timeSlot = (LinearLayout) v;
+
+
+                if (selectedSlot != null) {
+                    selectedSlot.setBackgroundResource(R.drawable.google_button_background);
+                }
+
+                // Sélectionner le nouveau créneau
+                timeSlot.setBackgroundResource(R.drawable.selected_background);
+                timeSlot.setBackgroundColor(getResources().getColor(R.color.red));
+                selectedSlot = timeSlot;
+
+            }
+        };
+        b1.setOnClickListener(slotClickListener);
+        b2.setOnClickListener(slotClickListener);
+        b3.setOnClickListener(slotClickListener);
+        b4.setOnClickListener(slotClickListener);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

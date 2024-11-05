@@ -9,15 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.R;
-import com.book.pharmacie.model.Commande;
+import com.book.pharmacie.model.Notification;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.CommandeViewHolder> {
 
-    private List<Commande> commandes;
+    private List<Notification> commandes;
 
-    public CommandeAdapter(List<Commande> commandes) {
+    public CommandeAdapter(List<Notification> commandes) {
         this.commandes = commandes;
     }
 
@@ -30,7 +35,7 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
 
     @Override
     public void onBindViewHolder(@NonNull CommandeViewHolder holder, int position) {
-        Commande commande = commandes.get(position);
+        Notification commande = commandes.get(position);
         // Mettre à jour le holder avec les informations de la commande
         holder.bind(commande);
     }
@@ -52,10 +57,34 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
             orderStatusTextView = itemView.findViewById(R.id.orderStatus);
         }
 
-        public void bind(Commande commande) {
-            orderIdTextView.setText("Identifiant: " + commande.getOrderId());
-            totalPriceTextView.setText("Total: " + commande.getTotalPrice());
-            orderStatusTextView.setText("Status: " + commande.getOrderStatus());
+        public void bind(Notification commande) {
+            orderIdTextView.setText(commande.getType());
+            totalPriceTextView.setText("Descr: " + commande.getMessage());
+            String dateNotification = commande.getDate();
+            String displayTime = getDisplayTime(dateNotification,commande.getHeure());
+
+            orderStatusTextView.setText(displayTime);
+        }
+
+        private String getDisplayTime(String dateNotification, String heure) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            try {
+                Date notificationDate = dateFormat.parse(dateNotification);
+                Date currentDate = new Date();
+
+                // Calculer la différence en jours
+                long diffInMillis = currentDate.getTime() - notificationDate.getTime();
+                long daysDifference = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+
+                if (daysDifference == 0) {
+                    return "Aujourd'hui"+" "+heure;
+                } else {
+                    return daysDifference + " jours";
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return dateNotification; // Si erreur, retourne la date d'origine
+            }
         }
     }
 }

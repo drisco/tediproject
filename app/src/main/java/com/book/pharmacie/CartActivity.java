@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.adapter.CartAdapter;
 import com.book.pharmacie.model.Commande;
+import com.book.pharmacie.model.Notification;
 import com.book.pharmacie.model.Product;
 import com.book.pharmacie.model.ProduitQuantite;
 import com.book.pharmacie.model.User;
@@ -52,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
     String latitude,longitude;
     private int incr;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,databaseReference1;
     SharedPreferencesHelper preferencesHelper;
     FusedLocationProviderClient fusedLocationProviderClient;
     User user;
@@ -105,6 +106,7 @@ public class CartActivity extends AppCompatActivity {
         cart_tax = findViewById(R.id.cart_tax);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("commandes").child(user.getUserId());
+        databaseReference1 = firebaseDatabase.getReference("notifi").child(user.getUserId());
         // Récupérer la liste des produits ajoutés au panier depuis l'intent
         ArrayList<Product> cartList = getIntent().getParcelableArrayListExtra("cart_list");
 
@@ -158,6 +160,8 @@ public class CartActivity extends AppCompatActivity {
         String totalPrice = cart_subtotal.getText().toString(); // Prix total de la commande
         String orderStatus = "en cours"; // Statut initial de la commande
         String orderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()); // Date actuelle
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+
 
         ArrayList<ProduitQuantite> produit = new ArrayList<>();
         Map<Product, Integer> produits = cartAdapter.getCartItemsWithQuantities();
@@ -167,16 +171,25 @@ public class CartActivity extends AppCompatActivity {
             produit.add(new ProduitQuantite(produit1, quantite));
         }
         Commande commande = new Commande(orderId, userId, produit, totalPrice, orderStatus, orderDate,latitude,longitude);
+        Notification notifi =new Notification(userId,"commande","Votre commande à ete prise en compte avec succès",orderDate,currentTime);
         databaseReference.child(orderId).setValue(commande)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(CartActivity.this, "Commande validée !", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CartActivity.this, MainActivity.class)); // Redirection
-                        finish();
+                        databaseReference1.child(orderId).setValue(notifi)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(CartActivity.this, "Commande validée !", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(CartActivity.this, MainActivity.class)); // Redirection
+                                        finish();
+                                    } else {
+                                        Toast.makeText(CartActivity.this, "Erreur lors de la validation de la commande", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     } else {
                         Toast.makeText(CartActivity.this, "Erreur lors de la validation de la commande", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
     private void showBottomNavigation() {
         cardbank.setVisibility(View.VISIBLE);

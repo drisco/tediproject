@@ -17,11 +17,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.book.pharmacie.model.Notification;
 import com.book.pharmacie.model.TeleConsulte;
 import com.book.pharmacie.model.User;
 import com.book.pharmacie.popup.PopusCostum;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PayerConsultation extends AppCompatActivity {
 
@@ -29,7 +34,7 @@ public class PayerConsultation extends AppCompatActivity {
     private TextView validateButton;
     private PopusCostum popusCostum;
     private ImageView backButton;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReference1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +61,10 @@ public class PayerConsultation extends AppCompatActivity {
             }
         });
         databaseReference = FirebaseDatabase.getInstance().getReference().child("consultation").child(patientId);
+        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("notifi").child(patientId);
+
+        String orderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()); // Date actuelle
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +74,8 @@ public class PayerConsultation extends AppCompatActivity {
                 String nouvelId = oneuser.getKey();
                 TeleConsulte user = new TeleConsulte(nouvelId,doctorName, doctorSpeciality,patientName, consultationDate, consultationTime);
                 oneuser.setValue(user);
-
+                Notification notifi =new Notification(nouvelId,"consultation","La planification de votre consultation a été éffectué avec succès",orderDate,currentTime);
+                databaseReference1.child(nouvelId).setValue(notifi);
                 popusCostum = new PopusCostum(PayerConsultation.this);
                 popusCostum.setCancelable(false);
                 popusCostum.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
