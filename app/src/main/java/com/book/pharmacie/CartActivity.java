@@ -155,10 +155,10 @@ public class CartActivity extends AppCompatActivity {
 
 
         // Créer une nouvelle commande
-        String orderId = databaseReference.push().getKey();
-        String userId = user.getUserId();
-        String totalPrice = cart_subtotal.getText().toString();
-        String orderStatus = "en cours";
+        String orderId = databaseReference.push().getKey(); // Générer un ID unique pour la commande
+        String userId = user.getUserId(); // Remplacez ceci par l'ID réel de l'utilisateur
+        String totalPrice = cart_subtotal.getText().toString(); // Prix total de la commande
+        String orderStatus = "en cours"; // Statut initial de la commande
         String orderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()); // Date actuelle
         String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
 

@@ -17,6 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.book.pharmacie.Admin.AdminActivity;
 import com.book.pharmacie.model.Livreur;
 import com.book.pharmacie.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -27,13 +28,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-    EditText phone_input,password_input;
-    LinearLayout connexion,inscription;
+    private EditText phone_input,password_input;
+    private LinearLayout connexion,inscription;
     private Livreur livreur;
     SharedPreferencesHelper preferencesHelper;
-    User user;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference usersRef = database.getReference("user");
+    private User user;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference usersRef = database.getReference("user");
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class Login extends AppCompatActivity {
         if (user !=null){
             if (!user.getEmail().isEmpty()){
                 if (user.getEmail().equals("livreur@gmail.com")){
-                    startActivity(new Intent(Login.this,MainActivity.class));
+                    startActivity(new Intent(Login.this, AdminActivity.class));
                     finish();
                 }else {
                     startActivity(new Intent(Login.this,MainActivity.class));
@@ -66,13 +68,12 @@ public class Login extends AppCompatActivity {
                 System.out.println("QSQSQSQSQSQSQQSQSQSQQSQQSSQQSSQQSQQSQSQSQSQQQSQQQSQQSSQSSQSQSQS "+livreur.getNumero()+livreur.getMdp());
                 view.startAnimation(zoomAnimation);
                 if (!phone_input.getText().toString().isEmpty() || !password_input.getText().toString().isEmpty()){
-                    if (phone_input.getText().toString().equals(livreur.getNumero())&& password_input.getText().toString().equals(livreur.getMdp())){
+                    if (phone_input.getText().toString().equals(livreur.getNumero()) && password_input.getText().toString().equals(livreur.getMdp())){
                         preferencesHelper.addUser(livreur.getId(), livreur.getNom(), livreur.getEmail(), livreur.getNumero(), livreur.getMdp());
-                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        Intent intent = new Intent(Login.this, AdminActivity.class);
                         startActivity(intent);
                         finish();
                     }else{
-
                         checkIfPhoneExists(phone_input.getText().toString(),password_input.getText().toString());
                     }
                 }else{
@@ -81,6 +82,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +91,7 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this,Register.class));
             }
         });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

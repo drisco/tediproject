@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/item_background"
+    android:gravity="center"
+    android:layout_margin="8dp"
+    android:elevation="4dp"> <!-- Ajout d'ombre pour le design -->
+
+    <TextView
+        android:id="@+id/doctorNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doctor Name"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="John Doe"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/patientNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient Name"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/patientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jane Smith"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/consultationDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultation Date"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/consultationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2024-11-05"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/consultationTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultation Time"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/consultationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:00 AM"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/doctorSpecialityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speciality Doctor"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/doctorSpeciality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cardiologist"
+        android:textSize="16sp" />
+</LinearLayout>

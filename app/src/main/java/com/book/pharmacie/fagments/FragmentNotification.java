@@ -54,26 +54,17 @@ public class FragmentNotification extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commandeList.clear(); // Effacer la liste précédente
-<<<<<<< HEAD
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Commande commande = snapshot.getValue(Commande.class);
-=======
                 if (dataSnapshot.exists()){
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Notification commande = snapshot.getValue(Notification.class);
->>>>>>> foutiyou
                         commandeList.add(commande);
                     }
+
                     commandeAdapter.notifyDataSetChanged(); // Notifier l'adapter des changements
-<<<<<<< HEAD
-                } else {
-                    // Ajouter un traitement si aucune commande n'existe
-=======
                 }else{
->>>>>>> foutiyou
                 }
+
             }
 
             @Override
@@ -83,3 +74,4 @@ public class FragmentNotification extends Fragment {
         });
     }
 }
+
