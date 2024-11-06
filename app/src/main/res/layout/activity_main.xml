@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fond"
-    android:id="@+id/main"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -27,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="labeled"
-        app:elevation="20dp"
+        app:elevation="2dp"
         app:itemIconTint="@drawable/selector"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation_menu" />
