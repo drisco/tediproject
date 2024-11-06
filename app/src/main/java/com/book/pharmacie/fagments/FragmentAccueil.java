@@ -1,32 +1,60 @@
 package com.book.pharmacie.fagments;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.book.pharmacie.Ambulance;
 import com.book.pharmacie.MainActivity;
 import com.book.pharmacie.Pharmacie;
 import com.book.pharmacie.R;
 import com.book.pharmacie.SharedPreferencesHelper;
+import com.book.pharmacie.TopDocteur;
 import com.book.pharmacie.Traditionnnel;
 import com.book.pharmacie.adapter.NewsAdapter;
 import com.book.pharmacie.model.NewsItem;
+import com.book.pharmacie.model.Notification;
+import com.book.pharmacie.model.TeleConsulte;
 import com.book.pharmacie.model.User;
+import com.book.pharmacie.service.NotiService;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class FragmentAccueil extends Fragment {
@@ -37,8 +65,13 @@ public class FragmentAccueil extends Fragment {
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList;
     TextView user_name;
+    private final String channelId = "countdown_notification_channel";
+    private final  int NOTIFICATION_ID = 123;
     SharedPreferencesHelper preferencesHelper;
     LinearLayout ambulance,topdoctor,tradi,pharmacie;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private static final int PERMISSION_REQUEST_CODE = 140;
 
 
     @SuppressLint("MissingInflatedId")
@@ -49,8 +82,14 @@ public class FragmentAccueil extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_acceuil, container, false);
         Animation zoomAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_animation);
+
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, PERMISSION_REQUEST_CODE);
+
+        }
         preferencesHelper = new SharedPreferencesHelper(getContext());
         searchView =getActivity().findViewById(R.id.searchView);
+        firebaseDatabase = FirebaseDatabase.getInstance();
         tradi =view.findViewById(R.id.tradi);
         ambulance =view.findViewById(R.id.ambulance);
         topdoctor =view.findViewById(R.id.topdoctor);
@@ -60,6 +99,93 @@ public class FragmentAccueil extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        User user = preferencesHelper.getUser();
+        if (user !=null){
+            if (!user.getName().isEmpty()){
+                user_name.setText(user.getName());
+            }
+        }
+        databaseReference = firebaseDatabase.getReference("consultation").child(user.getUserId());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    TeleConsulte commande = null;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        commande = snapshot.getValue(TeleConsulte.class);
+                    }
+
+                    if (commande != null) {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd", Locale.FRANCE);
+                        Date currentDate = new Date();
+                        String databaseDate = commande.getDateConsulte().replaceAll("[\\s\\n]", "").trim();
+
+
+                        /*String currentTimeString = heureFormat.format(currentDate);
+
+                        if (currentDateString.equalsIgnoreCase(databaseDate) &&
+                                currentTimeString.equalsIgnoreCase(commande.getHeureConsulte())) {
+                            showNotification("Consultation Reminder", "Votre consultation est prévue maintenant !");
+                        }*/
+
+                        Date consultationDateObj = null;
+                        try {
+                            consultationDateObj = dateFormat.parse(databaseDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(consultationDateObj);
+                        calendar.add(Calendar.DAY_OF_MONTH, -2);
+
+                        Date startNotificationDate = calendar.getTime();
+
+                        if (!currentDate.before(startNotificationDate)) {
+                            AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+                            Intent intent = new Intent(getContext(), NotiService.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                    getContext(),
+                                    (int) System.currentTimeMillis(),
+                                    intent,
+                                    PendingIntent.FLAG_IMMUTABLE
+                            );
+
+                            if (alarmManager != null) {
+                                System.out.println("NBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+                                calendar.set(Calendar.HOUR_OF_DAY, 18);
+                                calendar.set(Calendar.MINUTE, 0);
+                                calendar.set(Calendar.SECOND, 0);
+
+                                long interval = 60 * 1000;
+
+                                alarmManager.setRepeating(
+                                        AlarmManager.RTC_WAKEUP,
+                                        calendar.getTimeInMillis(),
+                                        interval,
+                                        pendingIntent
+                                );
+                            }
+
+                        }
+                    } else {
+                        System.out.println("Aucune commande trouvée.");
+                    }
+                } else {
+                    System.out.println("Aucune donnée disponible dans la base de données.");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "Erreur lors de la récupération des commandes.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         newsList = new ArrayList<>();
 // Ajouter des exemples de données avec des liens d'images
@@ -77,9 +203,7 @@ public class FragmentAccueil extends Fragment {
 
         newsAdapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(newsAdapter);
-        User user = preferencesHelper.getUser();
 
-        user_name.setText(user.getName());
         // Ajoutez le ScrollListener pour cacher la barre de navigation
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -112,8 +236,28 @@ public class FragmentAccueil extends Fragment {
 
             }
         });
+
+        topdoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), TopDocteur.class));
+
+            }
+        });
+
+        ambulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(getActivity(), Ambulance.class));
+
+            }
+        });
         return view;
 
     }
 
 }
+
+

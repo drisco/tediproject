@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class Register extends AppCompatActivity {
     private EditText passwordInput;
     private EditText confirmPasswordInput;
     private LinearLayout signupButton,login;
+    private ImageView back_button;
     DatabaseReference databaseReference;
     SharedPreferencesHelper preferencesHelper;
 
@@ -39,6 +41,7 @@ public class Register extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("user");
          preferencesHelper = new SharedPreferencesHelper(this);
 
+        back_button = findViewById(R.id.back_button);
         signupButton = findViewById(R.id.signup_button);
         login = findViewById(R.id.google_signup_button);
         Animation zoomAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_animation);
@@ -57,6 +60,15 @@ public class Register extends AppCompatActivity {
                 view.startAnimation(zoomAnimation);
                 // Récupérer les données lorsque le bouton est cliqué
                 registerUser();
+            }
+        });
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(zoomAnimation);
+                startActivity(new Intent(Register.this, RegisLogin.class));
+                finish();
             }
         });
 

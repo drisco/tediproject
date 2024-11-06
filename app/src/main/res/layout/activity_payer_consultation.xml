@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/main"
+    android:layout_margin="20dp"
+    tools:context=".PayerConsultation">
+
+<!-- Back Button -->
+<ImageView
+    android:id="@+id/backButton"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:src="@drawable/back"
+    android:background="?attr/selectableItemBackgroundBorderless" />
+
+<!-- Header Text -->
+<TextView
+    android:id="@+id/headerText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Paiement Consultation"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_toEndOf="@id/backButton"
+    android:layout_alignTop="@id/backButton"
+    android:layout_marginStart="16dp" />
+
+<!-- Payment Detail Section -->
+<TextView
+    android:id="@+id/paymentDetail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Payment Detail"
+    android:textStyle="bold"
+    android:layout_marginStart="10dp"
+    android:layout_below="@id/headerText"
+    android:layout_marginTop="30dp" />
+
+<TextView
+    android:id="@+id/consultationText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:text="Consultation en ligne"
+    android:layout_below="@id/paymentDetail"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="8dp" />
+
+<TextView
+    android:id="@+id/consultationPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="15000 CFA"
+    android:layout_alignBaseline="@id/consultationText"
+    android:layout_alignParentEnd="true" />
+
+<TextView
+    android:id="@+id/taxesText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Taxes"
+    android:layout_marginStart="10dp"
+    android:layout_below="@id/consultationText"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="8dp" />
+
+<TextView
+    android:id="@+id/taxesPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="500 CFA"
+    android:layout_alignBaseline="@id/taxesText"
+    android:layout_alignParentEnd="true" />
+
+<TextView
+    android:id="@+id/totalText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Total"
+    android:layout_marginStart="10dp"
+    android:textStyle="bold"
+    android:layout_below="@id/taxesText"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="8dp" />
+
+<TextView
+    android:id="@+id/totalPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="15500 CFA"
+    android:textStyle="bold"
+    android:layout_alignBaseline="@id/totalText"
+    android:layout_alignParentEnd="true" />
+
+<!-- CMU Number Section -->
+<TextView
+    android:id="@+id/cmuNumber"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Numéros de carte CMU"
+    android:textStyle="bold"
+    android:layout_marginStart="10dp"
+    android:layout_below="@id/totalText"
+    android:layout_marginTop="16dp" />
+
+<TextView
+    android:id="@+id/cmuSubtitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Si vous en avez pour une réduction des prix"
+    android:textSize="12sp"
+    android:layout_below="@id/cmuNumber"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp" />
+
+<EditText
+    android:id="@+id/cmuInput"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Entrer numéro CMU"
+    android:inputType="number"
+    android:padding="5dp"
+    android:layout_marginStart="10dp"
+    android:background="@drawable/border_background"
+    android:layout_below="@id/cmuSubtitle"
+    android:layout_marginTop="8dp" />
+
+<!-- Payment Method Section -->
+<TextView
+    android:id="@+id/paymentMethodTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Payment Method"
+    android:textStyle="bold"
+    android:layout_marginStart="10dp"
+    android:layout_below="@id/cmuInput"
+    android:layout_marginTop="16dp" />
+
+<!-- Payment Method Spinner -->
+    <LinearLayout
+        android:id="@+id/orange"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paymentMethodTitle"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_bar_background"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/orange"
+            app:civ_border_color="#B5EC9D"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:text="Selectionner"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/orange"
+        android:background="@drawable/search_bar_background"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mtn"
+            app:civ_border_color="#B5EC9D"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:text="Selectionner"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moov"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/mtn"
+        android:background="@drawable/search_bar_background"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar1"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moov"
+            app:civ_border_color="#B5EC9D"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:text="Selectionner"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/mtn"
+        android:background="@drawable/search_bar_background"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar2"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wave"
+            app:civ_border_color="#B5EC9D"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:text="Selectionner"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+<!-- Final Total Section -->
+<TextView
+    android:id="@+id/totalFinal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Total"
+    android:textStyle="bold"
+    android:layout_marginStart="10dp"
+    android:layout_below="@id/wave"
+    android:layout_marginTop="16dp" />
+
+<TextView
+    android:id="@+id/totalAmountFinal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="15500 CFA"
+    android:textStyle="bold"
+    android:layout_alignBaseline="@id/totalFinal"
+    android:layout_alignParentEnd="true" />
+
+<!-- Validate Button -->
+<TextView
+    android:id="@+id/validateButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Validez le paiement"
+    android:padding="15dp"
+    android:gravity="center"
+    android:layout_marginStart="10dp"
+    android:background="@drawable/google_button_background"
+    android:backgroundTint="@color/blue"
+    android:textStyle="bold"
+    android:textSize="16dp"
+    android:textColor="@color/white"
+    android:layout_below="@id/totalFinal"
+    android:layout_marginTop="16dp" />
+
+</RelativeLayout>

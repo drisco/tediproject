@@ -15,6 +15,7 @@ import com.book.pharmacie.R;
 import com.book.pharmacie.SharedPreferencesHelper;
 import com.book.pharmacie.adapter.CommandeAdapter;
 import com.book.pharmacie.model.Commande;
+import com.book.pharmacie.model.Notification;
 import com.book.pharmacie.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +30,7 @@ public class FragmentNotification extends Fragment {
     SharedPreferencesHelper preferencesHelper;
     private RecyclerView recyclerView;
     private CommandeAdapter commandeAdapter;
-    private List<Commande> commandeList = new ArrayList<>();
+    private List<Notification> commandeList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,20 +48,31 @@ public class FragmentNotification extends Fragment {
 
     private void loadCommandes() {
         User user = preferencesHelper.getUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("commandes").child(user.getUserId());
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("notifi").child(user.getUserId());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commandeList.clear(); // Effacer la liste précédente
+<<<<<<< HEAD
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Commande commande = snapshot.getValue(Commande.class);
+=======
+                if (dataSnapshot.exists()){
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Notification commande = snapshot.getValue(Notification.class);
+>>>>>>> foutiyou
                         commandeList.add(commande);
                     }
                     commandeAdapter.notifyDataSetChanged(); // Notifier l'adapter des changements
+<<<<<<< HEAD
                 } else {
                     // Ajouter un traitement si aucune commande n'existe
+=======
+                }else{
+>>>>>>> foutiyou
                 }
             }
 

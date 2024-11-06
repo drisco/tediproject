@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blue"
+    android:fitsSystemWindows="true"
+    tools:context=".ChatDoctor">
+
+    <!-- Couche de la Toolbar (reste fixe) -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="-3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back_chat"
+                    android:onClick="onBack"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+
+
+                <TextView
+                    android:layout_toEndOf="@id/profile_image_chat"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:text="Message"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="NotSibling" />
+
+                <LinearLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/option"
+                        app:tint="@color/white" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="-3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_chat"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_doctor_samp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+                <TextView
+                    android:layout_toEndOf="@id/profile_image_chat"
+                    android:id="@+id/fragmentNameTextView"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:text="Dr.Anne"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/phone"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:tint="@color/white" />
+                    <ImageView
+                        android:src="@drawable/notification"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:tint="@color/white" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Couche du contenu principal (poussée par le clavier si nécessaire) -->
+    <FrameLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#D9D9D9"
+        android:layout_weight="1"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp">
+
+            <!-- Ajout du RecyclerView pour afficher les messages -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:fastScrollEnabled="false"
+                android:layout_marginBottom="10dp"
+                android:background="#D9D9D9"
+                android:layout_above="@id/box_send_text"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"/>
+
+            <!-- Barre de saisie en bas -->
+            <LinearLayout
+                android:id="@+id/box_send_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:background="@drawable/google_button_background"
+                    android:gravity="bottom"
+                    android:padding="3dp"
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/attach_btn"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/plusb"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+
+                    <EditText
+                        android:id="@+id/inputMessage"
+                        android:background="@drawable/google_button_background"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        android:layout_weight="4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Tapez votre message"
+                        android:layout_marginBottom="1dp"
+                        android:imeOptions="actionSend"
+                        android:inputType="text" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sendButton"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="1dp"
+                    android:src="@drawable/send"/>
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/regisButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="1dp"
+                    android:src="@drawable/upload"
+                    app:tint="@color/blue" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>
