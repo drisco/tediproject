@@ -40,9 +40,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-<<<<<<< HEAD
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
-=======
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
@@ -51,5 +48,4 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:17.0.1")
     // implementation("com.github.bumptech.glide:compiler:4.15.1")
 
->>>>>>> foutiyou
 }
