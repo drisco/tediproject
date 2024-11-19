@@ -15,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.book.pharmacie.R;
 import com.book.pharmacie.model.Commande;
+import com.book.pharmacie.model.Notification;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -88,10 +92,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     private void updateOrderStatus(String orderId, String userId, String newStatus) {
+        String orderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("commandes").child(userId).child(orderId);
         orderRef.child("orderStatus").setValue(newStatus)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        String message ="";
+                        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("notifi").child(userId);
+                        if (newStatus.equals("Annulée")){
+                            message="Votre commande a été annulée en raison d'un manque de médicaments. Veuillez nous excuser pour la gêne occasionnée.";
+                        }else{
+                            message="Votre commande a été validée avec succès ! Elle sera livrée très bientôt.";
+                        }
+                        Notification notifi =new Notification(userId,"Commande",message,orderDate,currentTime);
+                        databaseReference1.child(userId).setValue(notifi);
                         Toast.makeText(context, "État mis à jour: " + newStatus, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Erreur lors de la mise à jour", Toast.LENGTH_SHORT).show();

@@ -30,6 +30,7 @@ import com.book.pharmacie.SharedPreferencesHelper;
 import com.book.pharmacie.TopDocteur;
 import com.book.pharmacie.Traditionnnel;
 import com.book.pharmacie.adapter.NewsAdapter;
+import com.book.pharmacie.model.Commande;
 import com.book.pharmacie.model.NewsItem;
 import com.book.pharmacie.model.Notification;
 import com.book.pharmacie.model.TeleConsulte;
@@ -88,6 +89,7 @@ public class FragmentAccueil extends Fragment {
 
         }
         preferencesHelper = new SharedPreferencesHelper(getContext());
+        User user = preferencesHelper.getUser();
         searchView =getActivity().findViewById(R.id.searchView);
         firebaseDatabase = FirebaseDatabase.getInstance();
         tradi =view.findViewById(R.id.tradi);
@@ -99,92 +101,95 @@ public class FragmentAccueil extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        User user = preferencesHelper.getUser();
         if (user !=null){
             if (!user.getName().isEmpty()){
                 user_name.setText(user.getName());
-            }
-        }
-        databaseReference = firebaseDatabase.getReference("consultation").child(user.getUserId());
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    TeleConsulte commande = null;
+                databaseReference = firebaseDatabase.getReference("consultation").child(user.getUserId());
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        commande = snapshot.getValue(TeleConsulte.class);
-                    }
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            TeleConsulte commande = null;
 
-                    if (commande != null) {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd", Locale.FRANCE);
-                        Date currentDate = new Date();
-                        String databaseDate = commande.getDateConsulte().replaceAll("[\\s\\n]", "").trim();
-
-
-                        /*String currentTimeString = heureFormat.format(currentDate);
-
-                        if (currentDateString.equalsIgnoreCase(databaseDate) &&
-                                currentTimeString.equalsIgnoreCase(commande.getHeureConsulte())) {
-                            showNotification("Consultation Reminder", "Votre consultation est prévue maintenant !");
-                        }*/
-
-                        Date consultationDateObj = null;
-                        try {
-                            consultationDateObj = dateFormat.parse(databaseDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTime(consultationDateObj);
-                        calendar.add(Calendar.DAY_OF_MONTH, -2);
-
-                        Date startNotificationDate = calendar.getTime();
-
-                        if (!currentDate.before(startNotificationDate)) {
-                            AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-
-                            Intent intent = new Intent(getContext(), NotiService.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                                    getContext(),
-                                    (int) System.currentTimeMillis(),
-                                    intent,
-                                    PendingIntent.FLAG_IMMUTABLE
-                            );
-
-                            if (alarmManager != null) {
-                                System.out.println("NBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-                                calendar.set(Calendar.HOUR_OF_DAY, 18);
-                                calendar.set(Calendar.MINUTE, 0);
-                                calendar.set(Calendar.SECOND, 0);
-
-                                long interval = 60 * 1000;
-
-                                alarmManager.setRepeating(
-                                        AlarmManager.RTC_WAKEUP,
-                                        calendar.getTimeInMillis(),
-                                        interval,
-                                        pendingIntent
-                                );
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                commande = snapshot.getValue(TeleConsulte.class);
                             }
 
-                        }
-                    } else {
-                        System.out.println("Aucune commande trouvée.");
-                    }
-                } else {
-                    System.out.println("Aucune donnée disponible dans la base de données.");
-                }
-            }
+                            if (commande != null) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Erreur lors de la récupération des commandes.", Toast.LENGTH_SHORT).show();
+                                String databaseDate = commande.getDateConsulte();
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+
+
+                                try {
+
+                                    Date targetDate = inputFormat.parse(databaseDate);
+
+                                    // Obtenir la date actuelle
+                                    Date currentDate = new Date();
+
+                                    // Calculer deux jours avant la date cible
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.setTime(targetDate);
+                                    calendar.add(Calendar.DAY_OF_MONTH, -2); // Reculer de 2 jours
+                                    Date twoDaysBefore = calendar.getTime();
+
+                                    // Afficher les résultats pour débogage
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    System.out.println("Deux jours avant : " + dateFormat.format(twoDaysBefore));
+                                    System.out.println("Date cible : " + dateFormat.format(targetDate));
+                                    System.out.println("Date actuelle : " + dateFormat.format(currentDate));
+
+                                    // Comparaison des dates
+                                    if (!currentDate.before(twoDaysBefore) && currentDate.before(targetDate)) {
+                                        System.out.println("Date currentDate Comparaison: " + targetDate);
+                                        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+                                        Intent intent = new Intent(getContext(), NotiService.class);
+                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                                getContext(),
+                                                (int) System.currentTimeMillis(),
+                                                intent,
+                                                PendingIntent.FLAG_IMMUTABLE
+                                        );
+
+                                        if (alarmManager != null) {
+                                            calendar.set(Calendar.HOUR_OF_DAY, 16);
+                                            calendar.set(Calendar.MINUTE, 0);
+                                            calendar.set(Calendar.SECOND, 0);
+
+                                            long interval = 10 * 60 * 1000;
+
+                                            alarmManager.setRepeating(
+                                                    AlarmManager.RTC_WAKEUP,
+                                                    calendar.getTimeInMillis(),
+                                                    interval,
+                                                    pendingIntent
+                                            );
+                                        }
+                                    } else {
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                System.out.println("Aucune commande trouvée.");
+                            }
+                        } else {
+                            System.out.println("Aucune donnée disponible dans la base de données.");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(), "Erreur lors de la récupération des commandes.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        }
+
 
 
         newsList = new ArrayList<>();
@@ -257,6 +262,7 @@ public class FragmentAccueil extends Fragment {
         return view;
 
     }
+
 
 }
 

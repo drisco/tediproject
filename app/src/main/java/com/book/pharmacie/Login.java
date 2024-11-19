@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.book.pharmacie.Admin.AdminActivity;
+import com.book.pharmacie.Admin.HomeAdmin;
 import com.book.pharmacie.model.Livreur;
 import com.book.pharmacie.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
     private EditText phone_input,password_input;
     private LinearLayout connexion,inscription;
+    ImageView back_button;
     private Livreur livreur;
     SharedPreferencesHelper preferencesHelper;
     private User user;
@@ -45,6 +47,7 @@ public class Login extends AppCompatActivity {
         preferencesHelper = new SharedPreferencesHelper(this);
         livreur =new Livreur();
         connexion= findViewById(R.id.signup_button);
+        back_button= findViewById(R.id.back_button);
         phone_input= findViewById(R.id.phone_input);
         password_input= findViewById(R.id.password_input);
         inscription= findViewById(R.id.google_signup_button);
@@ -54,7 +57,7 @@ public class Login extends AppCompatActivity {
         if (user !=null){
             if (!user.getEmail().isEmpty()){
                 if (user.getEmail().equals("livreur@gmail.com")){
-                    startActivity(new Intent(Login.this, AdminActivity.class));
+                    startActivity(new Intent(Login.this, HomeAdmin.class));
                     finish();
                 }else {
                     startActivity(new Intent(Login.this,MainActivity.class));
@@ -70,7 +73,7 @@ public class Login extends AppCompatActivity {
                 if (!phone_input.getText().toString().isEmpty() || !password_input.getText().toString().isEmpty()){
                     if (phone_input.getText().toString().equals(livreur.getNumero()) && password_input.getText().toString().equals(livreur.getMdp())){
                         preferencesHelper.addUser(livreur.getId(), livreur.getNom(), livreur.getEmail(), livreur.getNumero(), livreur.getMdp());
-                        Intent intent = new Intent(Login.this, AdminActivity.class);
+                        Intent intent = new Intent(Login.this, HomeAdmin.class);
                         startActivity(intent);
                         finish();
                     }else{
@@ -89,6 +92,16 @@ public class Login extends AppCompatActivity {
                 view.startAnimation(zoomAnimation);
                 // Récupérer les données lorsque le bouton est cliqué
                 startActivity(new Intent(Login.this,Register.class));
+            }
+        });
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(zoomAnimation);
+                // Récupérer les données lorsque le bouton est cliqué
+                startActivity(new Intent(Login.this, RegisLogin.class));
+                finish();
             }
         });
 

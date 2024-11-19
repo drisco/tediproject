@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Le RelativeLayout à l'intérieur du ScrollView -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Titre de la page -->
+        <TextView
+            android:id="@+id/settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paramètres"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"/>
+
+        <!-- Section Profil -->
+        <TextView
+            android:id="@+id/profile_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/settings_title"
+            android:layout_marginTop="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="1dp"
+            android:id="@+id/profile_image"
+            android:src="@drawable/phar"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@+id/profile_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            app:civ_border_color="#B5EC9D"
+            android:layout_width="85dp"
+            android:layout_height="85dp"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom de l'utilisateur"
+            android:textSize="16sp"
+            android:layout_below="@id/profile_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Modifier le mot de passe -->
+        <Button
+            android:id="@+id/change_password_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier le mot de passe"
+            android:layout_below="@id/user_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Section Notifications -->
+        <TextView
+            android:id="@+id/notifications_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/change_password_button"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <Switch
+            android:id="@+id/notification_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activer les notifications"
+            android:layout_below="@id/notifications_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <!-- Thème de l'application -->
+        <TextView
+            android:id="@+id/theme_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thème de l'application"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/notification_switch"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <RadioGroup
+            android:id="@+id/theme_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/theme_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/light_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clair"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/dark_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sombre"/>
+        </RadioGroup>
+
+        <!-- Langue -->
+        <TextView
+            android:id="@+id/language_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Langue"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/theme_radio_group"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <Spinner
+            android:id="@+id/language_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/language_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Confidentialité -->
+        <TextView
+            android:id="@+id/privacy_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confidentialité"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/language_spinner"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <Switch
+            android:id="@+id/privacy_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activer la confidentialité"
+            android:layout_below="@id/privacy_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <!-- Sécurité -->
+        <TextView
+            android:id="@+id/security_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sécurité"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/privacy_switch"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"/>
+
+        <Switch
+            android:id="@+id/security_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activer la sécurité"
+            android:layout_below="@id/security_section"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <!-- Déconnexion -->
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Se déconnecter"
+            android:layout_below="@id/security_switch"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"/>
+
+    </RelativeLayout>
+
+</android.widget.ScrollView>

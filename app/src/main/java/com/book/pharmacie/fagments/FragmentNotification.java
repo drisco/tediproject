@@ -61,7 +61,7 @@ public class FragmentNotification extends Fragment {
                         commandeList.add(commande);
                     }
 
-                    commandeAdapter.notifyDataSetChanged(); // Notifier l'adapter des changements
+                    commandeAdapter.notifyDataSetChanged();
                 }else{
                 }
 

@@ -43,7 +43,6 @@ public class ConsultationFragment extends Fragment {
         consultationList = new ArrayList<>();
         adapter = new ConsultationAdapter(consultationList);
         recyclerView.setAdapter(adapter);
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("consultation");
         fetchConsultations();
 
@@ -66,14 +65,8 @@ public class ConsultationFragment extends Fragment {
                         TeleConsulte consultation = consultationSnapshot.getValue(TeleConsulte.class);
                         if (consultation != null) {
                             consultationList.add(consultation);
+                            System.out.println("AZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"+consultationList.size());
 
-                            // Log des informations de la consultation
-                            Log.d("ConsultationFetch", "Consultation ID : " + consultationSnapshot.getKey());
-                            Log.d("ConsultationFetch", "Nom du Docteur : " + consultation.getNomDocteur());
-                            Log.d("ConsultationFetch", "Nom du Patient : " + consultation.getNomPatient());
-                            Log.d("ConsultationFetch", "Date de Consultation : " + consultation.getDateConsulte());
-                            Log.d("ConsultationFetch", "Heure de Consultation : " + consultation.getHeureConsulte());
-                            Log.d("ConsultationFetch", "Spécialité : " + consultation.getTypeconsulte());
                         }
                     }
                 }

@@ -12,9 +12,9 @@ public class Livreur {
     public Livreur() {
         this.id = "Livreur01"; // ID par défaut
         this.nom = "Tedji gael"; // Nom par défaut
-        this.numero = "+22569594256"; // Nom par défaut
+        this.numero = "1234"; // Nom par défaut
         this.email = "livreur@gmail.com"; // Nom par défaut
-        this.mdp = "livreur123"; // Nom par défaut
+        this.mdp = "aze"; // Nom par défaut
         this.latitude = "5.3188"; // Latitude par défaut
         this.longitude = "-4.0154"; // Longitude par défaut
     }

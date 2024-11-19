@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.HomeAdmin">
+ <!--   <RelativeLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="1dp"
+            android:id="@+id/avatar_image"
+            android:src="@drawable/phar"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="15dp"
+            android:elevation="2dp"
+            app:civ_border_color="#B5EC9D"
+            android:layout_width="85dp"
+            android:layout_height="85dp"/>
+        <LinearLayout
+            android:layout_below="@+id/avatar_image"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tedji Gael"/>
+            <TextView
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08090706"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/google_button_background"
+        android:backgroundTint="#654CAF50"
+        android:layout_marginBottom="-15dp">
+        <TextView
+            android:id="@+id/ttre"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Bienvenue dans notre application e-Pharmacie! Vous pouvez accéder aux différentes sections ci-dessous : Accueil pour explorer les services et produits, Paramètre pour configurer vos préférences, Commande pour suivre vos commandes de médicaments, et Livraison pour voir les informations de suivi de vos livraisons."/>
+        <LinearLayout
+            android:id="@+id/b1"
+            android:layout_below="@+id/ttre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            &lt;!&ndash; Bloc Accueil &ndash;&gt;
+            <TextView
+                android:id="@+id/commande"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/google_button_background"
+                android:gravity="center"
+                android:text="commande"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            &lt;!&ndash; Bloc Paramètre &ndash;&gt;
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/google_button_background"
+                android:gravity="center"
+                android:text="Livraison"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/b1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            &lt;!&ndash; Bloc Commande &ndash;&gt;
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/google_button_background"
+                android:gravity="center"
+                android:text="Paramètre"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            &lt;!&ndash; Bloc Livraison &ndash;&gt;
+            <TextView
+                android:id="@+id/deconnexion"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/google_button_background"
+                android:gravity="center"
+                android:text="Déconnexion"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:visibility="visible"
+        android:layout_margin="0dp" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelVisibilityMode="labeled"
+        android:layout_marginBottom="-10dp"
+        android:background="@drawable/search_bar_background"
+        app:elevation="2dp"
+        app:itemIconTint="@drawable/selector"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/adminmenu" />
+</RelativeLayout>

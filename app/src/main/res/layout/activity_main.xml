@@ -13,13 +13,17 @@
         android:layout_above="@+id/bottom_navigation"
         android:layout_margin="0dp" /> <!-- Assure-toi qu'il n'y a pas de marge -->
 
+    <!-- Assure-toi qu'il n'y a pas de marge -->
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
-        android:visibility="visible"
-        android:layout_margin="0dp" /> <!-- Assure-toi qu'il n'y a pas de marge -->
+        android:layout_margin="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="1dp"
+        android:visibility="visible" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

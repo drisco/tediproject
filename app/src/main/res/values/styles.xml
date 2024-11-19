@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <!-- Couleur des textes non sélectionnés -->
+        <item name="tabTextColor">@color/white</item>
+        <!-- Couleur des textes sélectionnés -->
+        <item name="tabSelectedTextColor">@color/blue</item>
+        <!-- Couleur de l'indicateur sous l'onglet actif -->
+        <item name="tabIndicatorColor">@color/blue</item>
+        <!-- Taille de l'indicateur -->
+        <item name="tabIndicatorHeight">6dp</item>
+    </style>
+</resources>

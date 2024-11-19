@@ -13,9 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.book.pharmacie.Admin.HomeAdmin;
 import com.book.pharmacie.model.User;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisLogin extends AppCompatActivity {
 
@@ -33,20 +32,27 @@ public class RegisLogin extends AppCompatActivity {
         google_button =findViewById(R.id.google_button);
 
         User user = preferencesHelper.getUser();
-
+        System.out.println("QVVQQVQVVQVQQVVQQVQVVQQV "+user);
+        if (user !=null){
+            if (user.getName().isEmpty()){
+                startActivity(new Intent(RegisLogin.this,Register.class));
+                finish();
+            }else {
+                if (user.getEmail().equals("livreur@gmail.com")){
+                    startActivity(new Intent(RegisLogin.this, HomeAdmin.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(RegisLogin.this,MainActivity.class));
+                    finish();
+                }
+            }
+        }
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(zoomAnimation);
-                if (user !=null){
-                    if (user.getName().isEmpty()){
-                        startActivity(new Intent(RegisLogin.this,Register.class));
-                        finish();
-                    }else {
-                        startActivity(new Intent(RegisLogin.this,MainActivity.class));
-                        finish();
-                    }
-                }
+                startActivity(new Intent(RegisLogin.this,Register.class));
+                finish();
 
             }
         });
@@ -64,7 +70,7 @@ public class RegisLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(zoomAnimation);
-                startActivity(new Intent(RegisLogin.this,ChatDoctor.class));
+               // startActivity(new Intent(RegisLogin.this,ChatDoctor.class));
                 //finish();
             }
         });

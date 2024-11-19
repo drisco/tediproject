@@ -13,11 +13,12 @@ public class Commande {
     private String orderDate;
     private String latitude;
     private String longitude;
+    private String timestamp;
 
     public Commande() {
     }
 
-    public Commande(String orderId, String userId, List<ProduitQuantite> produits, String totalPrice, String orderStatus, String orderDate, String latitude, String longitude) {
+    public Commande(String orderId, String userId, List<ProduitQuantite> produits, String totalPrice, String orderStatus, String orderDate, String latitude, String longitude, String timestamp) {
         this.orderId = orderId;
         this.userId = userId;
         this.produits = produits;
@@ -26,6 +27,7 @@ public class Commande {
         this.orderDate = orderDate;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.timestamp = timestamp;
     }
 
     public String getOrderId() {
@@ -90,6 +92,14 @@ public class Commande {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
 

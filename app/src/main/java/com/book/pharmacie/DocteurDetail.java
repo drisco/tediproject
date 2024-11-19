@@ -122,11 +122,26 @@ public class DocteurDetail extends AppCompatActivity implements DatesAdapter.OnD
             @Override
             public void onClick(View v) {
                 v.startAnimation(zoomAnimation);
+
+                String databaseDate = selectedDate.replaceAll("[\\s\\n]", "").trim();
+                String[] parts = databaseDate.split("\\."); // Séparer par "."
+                String dayNumber = parts[1];               // Obtenir "20"
+
+                // Obtenir le mois et l'année actuels
+                Calendar calendar = Calendar.getInstance();
+                int currentMonth = calendar.get(Calendar.MONTH) + 1; // Les mois commencent à 0
+                int currentYear = calendar.get(Calendar.YEAR);
+
+                // Construire une chaîne au format "dd.MM.yyyy"
+                String inputDateWithYear = dayNumber + "." + String.format("%02d", currentMonth) + "." + currentYear;
+
+                String heure = selectedTime.replace("PM", "").trim();
+
                 Intent intent =new Intent(DocteurDetail.this, PayerConsultation.class);
                 intent.putExtra("patientid",user.getUserId());
                 intent.putExtra("patientName",user.getName());
-                intent.putExtra("dateconsulte",selectedDate);
-                intent.putExtra("heureconsulte",selectedTime);
+                intent.putExtra("dateconsulte",inputDateWithYear);
+                intent.putExtra("heureconsulte",heure);
                 intent.putExtra("nondocteur",doctorName);
                 intent.putExtra("docteurspecialite",doctorSpeciality);
                 startActivity(intent);

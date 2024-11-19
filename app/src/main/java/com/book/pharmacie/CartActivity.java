@@ -161,6 +161,7 @@ public class CartActivity extends AppCompatActivity {
         String orderStatus = "en cours"; // Statut initial de la commande
         String orderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()); // Date actuelle
         String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
 
 
         ArrayList<ProduitQuantite> produit = new ArrayList<>();
@@ -170,7 +171,7 @@ public class CartActivity extends AppCompatActivity {
             Integer quantite = entry.getValue();
             produit.add(new ProduitQuantite(produit1, quantite));
         }
-        Commande commande = new Commande(orderId, userId, produit, totalPrice, orderStatus, orderDate,latitude,longitude);
+        Commande commande = new Commande(orderId, userId, produit, totalPrice, orderStatus, orderDate,latitude,longitude,timestamp);
         Notification notifi =new Notification(userId,"commande","Votre commande à ete prise en compte avec succès",orderDate,currentTime);
         databaseReference.child(orderId).setValue(commande)
                 .addOnCompleteListener(task -> {

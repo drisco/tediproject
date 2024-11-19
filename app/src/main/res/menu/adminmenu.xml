@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/bottom_navigation_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/accueil"
+        android:icon="@drawable/accueil"
+        android:title="Accueil" />
+
+
+    <item
+        android:id="@+id/parametres"
+        android:icon="@drawable/user"
+        android:title="Profil" />
+</menu>

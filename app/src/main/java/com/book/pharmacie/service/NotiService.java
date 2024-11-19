@@ -58,20 +58,43 @@ public class NotiService extends BroadcastReceiver {
                     }
 
                     if (commande != null) {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd", Locale.FRANCE);
-                        SimpleDateFormat heureFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                        // Formatter la date actuelle
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+                        // Formatter l'heure actuelle
+                        SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
+
+                        // Obtenir la date et l'heure actuelles
                         Date currentDate = new Date();
 
                         String currentDateString = dateFormat.format(currentDate);
                         String currentTimeString = heureFormat.format(currentDate);
-                        showNotification("Rappel de votre consultation", "Bonjour ! Nous vous rappelons que vous avez une consultation programmée pour le " + commande.getDateConsulte().replaceAll("[\\s\\n]", "").trim() + " à " + commande.getHeureConsulte() + ". Veuillez prendre les dispositions nécessaires pour être prêt à l'heure. Pour toute question ou modification, n'hésitez pas à nous contacter. Nous sommes là pour vous accompagner.", context);
 
-                        if (currentDateString.equalsIgnoreCase(commande.getDateConsulte().replaceAll("[\\s\\n]", "").trim()) &&
+                        // Afficher les valeurs pour débogage
+                        System.out.println("Date actuelle : " + currentDateString);
+                        System.out.println("Heure actuelle : " + currentTimeString);
+
+                        // Notification pour le rappel
+                        showNotification(
+                                "Rappel de votre consultation",
+                                "Bonjour ! Nous vous rappelons que vous avez une consultation programmée pour le " +
+                                        commande.getDateConsulte() + " à " + commande.getHeureConsulte() +
+                                        ". Veuillez prendre les dispositions nécessaires pour être prêt à l'heure. Pour toute question ou modification, n'hésitez pas à nous contacter. Nous sommes là pour vous accompagner.",
+                                context
+                        );
+
+                        // Comparer la date et l'heure actuelles avec celles de la consultation
+                        if (currentDateString.equalsIgnoreCase(commande.getDateConsulte()) &&
                                 currentTimeString.equalsIgnoreCase(commande.getHeureConsulte())) {
-                            showConsultation("Votre consultation commence maintenant", "C'est l'heure de votre consultation ! Votre rendez-vous est prévu pour aujourd'hui à " + commande.getHeureConsulte() + ". Connectez-vous dès maintenant pour profiter de votre consultation avec nos experts. Nous vous souhaitons une excellente séance.", context);
-                            System.out.println("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+                            showConsultation(
+                                    "Votre consultation commence maintenant",
+                                    "C'est l'heure de votre consultation ! Votre rendez-vous est prévu pour aujourd'hui à " +
+                                            commande.getHeureConsulte() +
+                                            ". Connectez-vous dès maintenant pour profiter de votre consultation avec nos experts. Nous vous souhaitons une excellente séance.",
+                                    context
+                            );
                         }
                     }
+
                 } else {
                     Toast.makeText(context, "Aucune consultation trouvée.", Toast.LENGTH_SHORT).show();
                 }
@@ -113,7 +136,7 @@ public class NotiService extends BroadcastReceiver {
         createNotificationChannel(context);
             System.out.println("PAS DE NOTIFICZATIONPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.notification)
+                .setSmallIcon(R.drawable.add)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))

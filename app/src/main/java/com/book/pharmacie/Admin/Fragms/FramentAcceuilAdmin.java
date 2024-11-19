@@ -1,42 +1,34 @@
-package com.book.pharmacie.Admin;
+package com.book.pharmacie.Admin.Fragms;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.book.pharmacie.Admin.Fragms.CommandeFragment;
-import com.book.pharmacie.Admin.Fragms.ConsultationFragment;
+
 import com.book.pharmacie.R;
 import com.google.android.material.tabs.TabLayout;
-import android.widget.FrameLayout;
 
-public class AdminActivity extends AppCompatActivity {
+public class FramentAcceuilAdmin extends Fragment {
 
     private FrameLayout frameLayout;
     private TabLayout tabLayout;
 
     @SuppressLint("MissingInflatedId")
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_acceuiladmin, container, false);
         // Initialize TabLayout and FrameLayout
-        tabLayout = findViewById(R.id.tab_layout);
-        frameLayout = findViewById(R.id.frameLayout);
+        tabLayout = view.findViewById(R.id.tab_layout);
+        frameLayout = view.findViewById(R.id.frameLayout);
 
         // Set up the tabs
         setupTabLayout();
@@ -45,6 +37,8 @@ public class AdminActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             switchFragment(new CommandeFragment());
         }
+
+        return view;
     }
 
     private void setupTabLayout() {
@@ -72,7 +66,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void switchFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.addToBackStack(null); // Allows you to go back to the previous fragment
