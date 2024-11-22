@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.book.pharmacie.ChatDoctor;
 import com.book.pharmacie.MainActivity;
 import com.book.pharmacie.R;
 import com.book.pharmacie.SharedPreferencesHelper;
@@ -58,41 +59,47 @@ public class NotiService extends BroadcastReceiver {
                     }
 
                     if (commande != null) {
-                        // Formatter la date actuelle
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
-                        // Formatter l'heure actuelle
-                        SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
 
-                        // Obtenir la date et l'heure actuelles
-                        Date currentDate = new Date();
+                        if (commande.getIsfinish()==false){
 
-                        String currentDateString = dateFormat.format(currentDate);
-                        String currentTimeString = heureFormat.format(currentDate);
+                            // Formatter la date actuelle
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+                            // Formatter l'heure actuelle
+                            SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
 
-                        // Afficher les valeurs pour débogage
-                        System.out.println("Date actuelle : " + currentDateString);
-                        System.out.println("Heure actuelle : " + currentTimeString);
+                            // Obtenir la date et l'heure actuelles
+                            Date currentDate = new Date();
 
-                        // Notification pour le rappel
-                        showNotification(
-                                "Rappel de votre consultation",
-                                "Bonjour ! Nous vous rappelons que vous avez une consultation programmée pour le " +
-                                        commande.getDateConsulte() + " à " + commande.getHeureConsulte() +
-                                        ". Veuillez prendre les dispositions nécessaires pour être prêt à l'heure. Pour toute question ou modification, n'hésitez pas à nous contacter. Nous sommes là pour vous accompagner.",
-                                context
-                        );
+                            String currentDateString = dateFormat.format(currentDate);
+                            String currentTimeString = heureFormat.format(currentDate);
 
-                        // Comparer la date et l'heure actuelles avec celles de la consultation
-                        if (currentDateString.equalsIgnoreCase(commande.getDateConsulte()) &&
-                                currentTimeString.equalsIgnoreCase(commande.getHeureConsulte())) {
-                            showConsultation(
-                                    "Votre consultation commence maintenant",
-                                    "C'est l'heure de votre consultation ! Votre rendez-vous est prévu pour aujourd'hui à " +
-                                            commande.getHeureConsulte() +
-                                            ". Connectez-vous dès maintenant pour profiter de votre consultation avec nos experts. Nous vous souhaitons une excellente séance.",
+                            // Afficher les valeurs pour débogage
+                            System.out.println("Date actuelle : " + currentDateString);
+                            System.out.println("Heure actuelle : " + currentTimeString);
+
+                            // Notification pour le rappel
+                            showNotification(
+                                    "Rappel de votre consultation",
+                                    "Bonjour ! Nous vous rappelons que vous avez une consultation programmée pour le " +
+                                            commande.getDateConsulte() + " à " + commande.getHeureConsulte() +
+                                            ". Veuillez prendre les dispositions nécessaires pour être prêt à l'heure. Pour toute question ou modification, n'hésitez pas à nous contacter. Nous sommes là pour vous accompagner.",
                                     context
                             );
+
+                            // Comparer la date et l'heure actuelles avec celles de la consultation
+                            if (currentDateString.equalsIgnoreCase(commande.getDateConsulte()) &&
+                                    currentTimeString.equalsIgnoreCase(commande.getHeureConsulte())) {
+                                showConsultation(
+                                        "Votre consultation commence maintenant",
+                                        "C'est l'heure de votre consultation ! Votre rendez-vous est prévu pour aujourd'hui à " +
+                                                commande.getHeureConsulte() +
+                                                ". Connectez-vous dès maintenant pour profiter de votre consultation avec nos experts. Nous vous souhaitons une excellente séance.",
+                                        context
+                                );
+                                databaseReference.child(commande.getId()).child("isfinish").setValue(true);
+                            }
                         }
+
                     }
 
                 } else {
@@ -113,13 +120,16 @@ public class NotiService extends BroadcastReceiver {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                    .setSmallIcon(R.drawable.notification)
+                    .setSmallIcon(R.drawable.add)
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(message))
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setAutoCancel(true);
             // Créer une intention pour ouvrir l'activité appropriée lors de la clic de la notification
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(context, ChatDoctor.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
             builder.setContentIntent(pendingIntent);
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
@@ -139,17 +149,20 @@ public class NotiService extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.add)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
 
-        /*Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context,
                 0,
                 intent,
                 PendingIntent.FLAG_IMMUTABLE
         );
-        builder.setContentIntent(pendingIntent);*/
+        builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 

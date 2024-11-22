@@ -36,6 +36,7 @@ public class ChatDoctor extends AppCompatActivity {
     private MessageAdapter adapter;
     SharedPreferencesHelper preferencesHelper;
     User user;
+    int incr;
 
     private String[] questions  = {
             // Premières questions
@@ -159,4 +160,14 @@ public class ChatDoctor extends AppCompatActivity {
         adapter.notifyItemInserted(messages.size() - 1);
         recyclerView.scrollToPosition(messages.size() - 1);
     }
+    @Override
+    public void onBackPressed() {
+        incr++;
+        if (incr==2){
+            super.onBackPressed();
+            //finish();
+            finishAffinity();
+        }
+    }
+
 }

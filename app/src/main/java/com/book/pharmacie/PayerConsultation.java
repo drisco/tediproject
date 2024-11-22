@@ -72,7 +72,7 @@ public class PayerConsultation extends AppCompatActivity {
 
                 DatabaseReference oneuser = databaseReference.push();
                 String nouvelId = oneuser.getKey();
-                TeleConsulte user = new TeleConsulte(nouvelId,doctorName, doctorSpeciality,patientName, consultationDate, consultationTime);
+                TeleConsulte user = new TeleConsulte(nouvelId,doctorName, doctorSpeciality,patientName, consultationDate, consultationTime,false);
                 oneuser.setValue(user);
                 Notification notifi =new Notification(nouvelId,"consultation","La planification de votre consultation a été éffectué avec succès",orderDate,currentTime);
                 databaseReference1.child(nouvelId).setValue(notifi);

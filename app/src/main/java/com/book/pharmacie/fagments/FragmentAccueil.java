@@ -118,64 +118,78 @@ public class FragmentAccueil extends Fragment {
                             }
 
                             if (commande != null) {
-
-                                String databaseDate = commande.getDateConsulte();
-                                SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
-
-
-                                try {
-
-                                    Date targetDate = inputFormat.parse(databaseDate);
-
-                                    // Obtenir la date actuelle
-                                    Date currentDate = new Date();
-
-                                    // Calculer deux jours avant la date cible
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.setTime(targetDate);
-                                    calendar.add(Calendar.DAY_OF_MONTH, -2); // Reculer de 2 jours
-                                    Date twoDaysBefore = calendar.getTime();
-
-                                    // Afficher les résultats pour débogage
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    System.out.println("Deux jours avant : " + dateFormat.format(twoDaysBefore));
-                                    System.out.println("Date cible : " + dateFormat.format(targetDate));
-                                    System.out.println("Date actuelle : " + dateFormat.format(currentDate));
-
-                                    // Comparaison des dates
-                                    if (!currentDate.before(twoDaysBefore) && currentDate.before(targetDate)) {
-                                        System.out.println("Date currentDate Comparaison: " + targetDate);
-                                        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-
-                                        Intent intent = new Intent(getContext(), NotiService.class);
-                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                                                getContext(),
-                                                (int) System.currentTimeMillis(),
-                                                intent,
-                                                PendingIntent.FLAG_IMMUTABLE
-                                        );
-
-                                        if (alarmManager != null) {
-                                            calendar.set(Calendar.HOUR_OF_DAY, 16);
-                                            calendar.set(Calendar.MINUTE, 0);
-                                            calendar.set(Calendar.SECOND, 0);
-
-                                            long interval = 10 * 60 * 1000;
-
-                                            alarmManager.setRepeating(
-                                                    AlarmManager.RTC_WAKEUP,
-                                                    calendar.getTimeInMillis(),
-                                                    interval,
-                                                    pendingIntent
-                                            );
-                                        }
-                                    } else {
-                                    }
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
                                 System.out.println("Aucune commande trouvée.");
+
+                                    if (commande.getIsfinish() == false){
+
+                                        System.out.println("Aucune commande trouvéexxxxxxxx."+commande.getIsfinish());
+                                        String databaseDate = commande.getDateConsulte();
+                                        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+
+
+                                        try {
+
+                                            Date targetDate = inputFormat.parse(databaseDate);
+
+                                            // Obtenir la date actuelle
+                                            Date currentDate = new Date();
+
+                                            // Calculer deux jours avant la date cible
+                                            Calendar calendar = Calendar.getInstance();
+                                            calendar.setTime(targetDate);
+                                            calendar.add(Calendar.DAY_OF_MONTH, -2); // Reculer de 2 jours
+                                            Date twoDaysBefore = calendar.getTime();
+
+                                            // Afficher les résultats pour débogage
+                                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                            System.out.println("Deux jours avant : " + dateFormat.format(twoDaysBefore));
+                                            System.out.println("Date cible : " + dateFormat.format(targetDate));
+                                            System.out.println("Date actuelle : " + dateFormat.format(currentDate));
+
+
+                                            //DATE POUR DFAIRE LA COMPARAISON
+                                            String formattedCurrentDate = dateFormat.format(currentDate);
+                                            String formattedTargetDate = dateFormat.format(targetDate);
+
+
+                                            // Comparaison des dates
+                                            if (!currentDate.before(twoDaysBefore) && currentDate.before(targetDate)|| formattedCurrentDate.equals(formattedTargetDate)) {
+                                                System.out.println("Date currentDate Comparaison: " + targetDate);
+                                                AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+                                                Intent intent = new Intent(getContext(), NotiService.class);
+                                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                                        getContext(),
+                                                        (int) System.currentTimeMillis(),
+                                                        intent,
+                                                        PendingIntent.FLAG_IMMUTABLE
+                                                );
+
+                                                if (alarmManager != null) {
+                                                    calendar.set(Calendar.HOUR_OF_DAY, 10);
+                                                    calendar.set(Calendar.MINUTE, 0);
+                                                    calendar.set(Calendar.SECOND, 0);
+
+                                                    long interval = 60 * 1000;
+
+                                                    alarmManager.setRepeating(
+                                                            AlarmManager.RTC_WAKEUP,
+                                                            calendar.getTimeInMillis(),
+                                                            interval,
+                                                            pendingIntent
+                                                    );
+                                                }
+                                            } else {
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        System.out.println("Aucune commande false false."+commande.getIsfinish());
+                                    }
+
+                            } else {
+
                             }
                         } else {
                             System.out.println("Aucune donnée disponible dans la base de données.");

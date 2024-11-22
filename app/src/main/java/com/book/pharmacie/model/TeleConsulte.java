@@ -7,17 +7,18 @@ public class TeleConsulte {
     private String NomPatient;
     private String DateConsulte;
     private String HeureConsulte;
-
+    private Boolean isfinish=false;
     public TeleConsulte() {
     }
 
-    public TeleConsulte(String id, String nomDocteur,String Typeconsulte, String nomPatient, String dateConsulte, String heureConsulte) {
+    public TeleConsulte(String id, String nomDocteur,String Typeconsulte, String nomPatient, String dateConsulte, String heureConsulte, Boolean isfinish) {
         this.id = id;
         NomDocteur = nomDocteur;
         Typeconsulte = Typeconsulte;
         NomPatient = nomPatient;
         DateConsulte = dateConsulte;
         HeureConsulte = heureConsulte;
+        isfinish = isfinish;
     }
 
 
@@ -68,5 +69,13 @@ public class TeleConsulte {
 
     public void setHeureConsulte(String heureConsulte) {
         HeureConsulte = heureConsulte;
+    }
+
+    public Boolean getIsfinish() {
+        return isfinish;
+    }
+
+    public void setIsfinish(Boolean isfinish) {
+        this.isfinish = isfinish;
     }
 }
